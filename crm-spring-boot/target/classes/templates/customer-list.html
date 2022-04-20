@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>C-R-M</title>
+</head>
+<body>
+<h1>Customer Management System</h1>
+<hr/>
+<br>
+<a th:href="@{/customers/showFormForAdd}" class="btn btn-primary"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i></a>
+<br>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.id}"/>
+            <td th:text="${customer.firstName}"/>
+            <td th:text="${customer.lastName}"/>
+            <td th:text="${customer.email}"/>
+            <td>
+                <a th:href="@{/customers/showFormForDetails(id=${customer.id})}"
+                   class="btn btn-info"><i class="fa fa-address-card fa-fw" aria-hidden="true"></i></a>
+
+                <a th:href="@{/customers/delete(id=${customer.id})}"
+                   class="btn btn-danger"
+                   onclick="if(!(confirm('Are you sure you want to DELETE this employee?'))) return false"><i class="fa fa-user-times fa-fw"></i></a>
+
+                <a th:href="@{/customers/showFormForUpdate(id=${customer.id})}"
+                   class="btn btn-warning">Edit</a>
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
